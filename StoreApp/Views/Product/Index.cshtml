@@ -1,0 +1,40 @@
+@*
+
+_ViewStart.cshtml yapıp defaultta otomatik atama yapar.
+@{
+Layout="_Layout";
+}
+*@
+
+@* ViewImports adı altın html sayfası açılıp kütüphaneleri oraya
+entegre edince View klasörü içindeki tüm html dosyalarında sınıflar
+çağırılabilmektedir.
+@model List<StoreApp.Models.Product>
+aşaüıdaki gibi tekrar tekrar ktüphane çağrılmadan nesne
+çağırılabilmektedir.
+*@
+
+@model IQueryable<Product>
+
+<div class="row">
+    <div class="col-md-3">
+        @await Component.InvokeAsync("CategoriesMenu")
+    </div>
+    <div class="col-md-9">
+        @* @foreach (StoreApp.Models.Product prd in Model) *@
+        <div class="row my-3">
+            @foreach (Product prd in Model)
+            {
+                <partial name="_ProductCard" model="prd" />
+                @* yukarıdaki tag helper ise çağıraln kısım html sayfasıdır. *@
+
+            }
+        </div>
+    </div>
+</div>
+@* yukarıda 1 satır 2 sütun yaplmaya çalışdı.*@
+@section Footer {
+    <div>
+        Only for Index Footer
+    </div>
+}
