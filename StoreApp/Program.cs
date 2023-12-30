@@ -27,6 +27,9 @@ builder.Services.AddScoped<IProductService,ProductManager>();
 builder.Services.AddScoped<ICategoryService,CategoryManager>();
 //Yukarıda kayıt işlemleri yapıldı IoC çözümleyebilmesi için Service için
 
+builder.Services.AddAutoMapper(typeof(Program));
+//Automapper service kaydı oluşturuldu.
+
 var app = builder.Build();
 
 app.UseStaticFiles();

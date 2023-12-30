@@ -56,3 +56,5 @@ C:\Users\Tolunay\Desktop\MVC\Store\StoreApp\bin\Debug\net6.0\Repositories.dll
 C:\Users\Tolunay\Desktop\MVC\Store\StoreApp\bin\Debug\net6.0\Repositories.pdb
 C:\Users\Tolunay\Desktop\MVC\Store\StoreApp\bin\Debug\net6.0\Services.dll
 C:\Users\Tolunay\Desktop\MVC\Store\StoreApp\bin\Debug\net6.0\Services.pdb
+C:\Users\Tolunay\Desktop\MVC\Store\StoreApp\bin\Debug\net6.0\AutoMapper.dll
+C:\Users\Tolunay\Desktop\MVC\Store\StoreApp\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll

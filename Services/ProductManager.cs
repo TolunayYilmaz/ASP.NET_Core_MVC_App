@@ -1,4 +1,7 @@
-﻿using Entities.Models;
+﻿using AutoMapper;
+using Entities.Dtos;
+using Entities.Models;
+using Repositories;
 using Repositories.Contracts;
 using Services.Contracts;
 
@@ -7,16 +10,26 @@ namespace Services
     public class ProductManager : IProductService
     {
         private readonly IRepositoryManager _manager;
+        private readonly IMapper _mapper;
 
-        public ProductManager(IRepositoryManager manager)
+        public ProductManager(IRepositoryManager manager,IMapper mapper)
         {
             _manager = manager;
+            _mapper=mapper; 
         }
 
-        public void CreateProduct(Product product)
+        public void CreateProduct(ProductDtoForInsertion productDto)
         {
-         _manager.Product.CreateOneProduct(product);
-         _manager.Save();
+            // Product product = new Product()
+            // {
+            //     ProductName=productDto.ProductName,
+            //     Price=productDto.Price,
+            //     CategoryId=productDto.CategoryId
+            // };
+            // yukarıdaki işlemi mapper ile yapabiliriz aşşağıda 
+            Product product=_mapper.Map<Product>(productDto);
+            _manager.Product.CreateOneProduct(product);
+            _manager.Save();
         }
 
         public void DeleteOneProduct(int id)
@@ -46,11 +59,22 @@ namespace Services
 
         }
 
-       public void UpdateOneProduct(Product product)
+        public ProductDtoForUpdate? GetOneProductForUpdate(int id, bool trackChanges)
         {
-            var entity =_manager.Product.GetOneProduct(product.ProductId,true);
-            entity.ProductName=product.ProductName;
-            entity.Price=product.Price;
+            var product =GetOneProduct(id,trackChanges);
+            var productDto =_mapper.Map<ProductDtoForUpdate>(product);
+            return productDto;
+
+        }
+
+        public void UpdateOneProduct(ProductDtoForUpdate productDto)
+        {
+            //var entity =_manager.Product.GetOneProduct(productDto.ProductId,true);
+            // entity.ProductName=productDto.ProductName;
+            // entity.Price=productDto.Price;
+            // entity.CategoryId=productDto.CategoryId;
+            var entity =_mapper.Map<Product>(productDto);
+            _manager.Product.UpdateOneProduct(entity);
             _manager.Save();
             
         }
